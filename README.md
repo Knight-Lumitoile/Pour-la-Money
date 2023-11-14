@@ -1,8 +1,22 @@
 # Pour la Money
 
-***Pour la Money*** is an application that helps people to manage their financial transactions.
+***Pour la Money*** is an application that helps people to manage and summaries their financial transactions data.
 
 ## Structure
+
+```mermaid
+graph TD;
+    B[Electron.js];
+    D[SQLite];
+    subgraph APP
+        A[React.js];
+        C[Express.js];
+        A-- HTTP Request -->C;
+        C-- HTTP Response -->A;
+    end
+    B-- Hosting -->APP;
+    APP-- Data Flow ---D;
+```
 
 ## Installation
 
