@@ -9,17 +9,17 @@ import dayjs from "dayjs"
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore"
 import locale from "../../Static/Config/Locale/content.json"
 import req from "../../Connector/WebConnector"
-import { App, Button, Layout, Menu, Space, Table, Tag, Tooltip, Typography } from "antd"
-import { AppConfig } from "../../App"
-import { useContext, useEffect, useState } from "react"
+import {App, Button, Layout, Menu, Space, Table, Tag, Tooltip, Typography} from "antd"
+import {AppConfig} from "../../App"
+import {useContext, useEffect, useState} from "react"
 
 dayjs.extend(isSameOrBefore)
 
-function Transactions({ isSiderOpen, }) {
+function Transactions({isSiderOpen,}) {
 
-    const { arrRecords, arrCurrencies, arrTypes, _arrRecords, config } = useContext(AppConfig)
+    const {arrRecords, arrCurrencies, arrTypes, _arrRecords, config} = useContext(AppConfig)
 
-    const { modal } = App.useApp()
+    const {modal} = App.useApp()
 
     const [objDateIndexes, _objDateIndexes] = useState({})
     const [strCurrentDateIndex, _strCurrentDateIndex] = useState("")
@@ -54,8 +54,8 @@ function Transactions({ isSiderOpen, }) {
         for (let i = 0; i < arrRecords.length; i++) {
             arrEntities.add(arrRecords[i].entity)
         }
-        _arrEntities(Array.from(arrEntities).map(value => ({ text: value, value: value })))
-        return Array.from(arrEntities).map(value => ({ value: value }))
+        _arrEntities(Array.from(arrEntities).map(value => ({text: value, value: value})))
+        return Array.from(arrEntities).map(value => ({value: value}))
     }
 
     const getDateIndexes = (arrRecords) => {
@@ -67,9 +67,9 @@ function Transactions({ isSiderOpen, }) {
         }
         const objIndexes = {
             0: {
-                label: <CpnDateTypography code={"0"} />,
+                label: <CpnDateTypography code={"0"}/>,
                 key: "0",
-                icon: <Icons.UI.Dashboard />
+                icon: <Icons.UI.Dashboard/>
             }
         }
         const arrIndexes = {}
@@ -80,9 +80,9 @@ function Transactions({ isSiderOpen, }) {
             const strMonth = currentDate.format("MM")
             const strCode = `${strYear}-${strMonth}`
             const objMonth = {
-                label: <CpnDateTypography code={strCode} />,
+                label: <CpnDateTypography code={strCode}/>,
                 key: strCode,
-                icon: <CpnIcon />
+                icon: <CpnIcon/>
             }
             arrIndexes[strCode] = 0
             if (objIndexes[strYear]) {
@@ -91,10 +91,10 @@ function Transactions({ isSiderOpen, }) {
                 objIndexes[strYear] = {
                     label: strYear,
                     key: strYear,
-                    icon: <Icons.UI.Database />,
+                    icon: <Icons.UI.Database/>,
                     children: [
                         {
-                            label: <CpnDateTypography code={`${strYear}-00`} />,
+                            label: <CpnDateTypography code={`${strYear}-00`}/>,
                             key: `${strYear}-00`
                         },
                         objMonth
@@ -134,8 +134,8 @@ function Transactions({ isSiderOpen, }) {
         const objBarChartData = {}
         const objBalanceByCurrency = {}
         for (const obj of arrTypes.map(o => o.name)) {
-            objAreaChartData[obj] = { ...arrIndexes }
-            objPieChartData[obj] = { value: 0, breakdown: {} }
+            objAreaChartData[obj] = {...arrIndexes}
+            objPieChartData[obj] = {value: 0, breakdown: {}}
         }
 
         let numExpenseSum = 0
@@ -214,9 +214,9 @@ function Transactions({ isSiderOpen, }) {
 
     const openRecord = (objRecord) => {
         if (arrCurrencies.length === 0) {
-            modal.info({ title: locale[config.locale].msg.no_currencies, centered: true })
+            modal.info({title: locale[config.locale].msg.no_currencies, centered: true})
         } else if (arrTypes.length === 0) {
-            modal.info({ title: locale[config.locale].msg.no_types, centered: true })
+            modal.info({title: locale[config.locale].msg.no_types, centered: true})
         } else {
             _objCurrentRecord(objRecord)
             _isRecordFormOpen(true)
@@ -262,9 +262,9 @@ function Transactions({ isSiderOpen, }) {
         )
     }
 
-    const CpnDateTypography = ({ code }) => {
+    const CpnDateTypography = ({code}) => {
 
-        const { config } = useContext(AppConfig)
+        const {config} = useContext(AppConfig)
 
         let objDate = dayjs(code, "YYYY-MM")
         if (code === "0") {
@@ -283,13 +283,13 @@ function Transactions({ isSiderOpen, }) {
                     <Button
                         size="small"
                         type="text"
-                        icon={<Icons.UI.More />}
+                        icon={<Icons.UI.More/>}
                     />
                 </Tooltip>
                 <Button
                     size="small"
                     type="text"
-                    icon={<Icons.UI.Delete />}
+                    icon={<Icons.UI.Delete/>}
                     onClick={() => deleteRecord(obj)}
                 />
             </Space>
@@ -308,23 +308,23 @@ function Transactions({ isSiderOpen, }) {
             key: "entity",
             filters: arrEntities,
             onFilter: (value, record) => record.entity === value,
-            sorter: { compare: (a, b) => a.entity.localeCompare(b.entity), multiple: 1 }
+            sorter: {compare: (a, b) => a.entity.localeCompare(b.entity), multiple: 1}
         },
         {
             title: locale[config.locale].label.type,
             dataIndex: "type",
             key: "type",
-            render: obj => <Components.TransactionType.Tag item={obj} />,
-            filters: arrTypes.map(obj => ({ text: <Components.TransactionType.Tag item={obj} />, value: obj.key })),
+            render: obj => <Components.TransactionType.Tag item={obj}/>,
+            filters: arrTypes.map(obj => ({text: <Components.TransactionType.Tag item={obj}/>, value: obj.key})),
             onFilter: (value, record) => record.type.key === value,
-            sorter: { compare: (a, b) => a.type.name.localeCompare(b.type.name), multiple: 1 }
+            sorter: {compare: (a, b) => a.type.name.localeCompare(b.type.name), multiple: 1}
         },
         {
             title: locale[config.locale].label.date,
             dataIndex: "date",
             key: "date",
             render: obj => obj.format("YYYY-MM-DD"),
-            sorter: { compare: (a, b) => Number(a.date.format("MMDD")) - Number(b.date.format("MMDD")), multiple: 1 },
+            sorter: {compare: (a, b) => Number(a.date.format("MMDD")) - Number(b.date.format("MMDD")), multiple: 1},
             defaultSortOrder: "descend"
         },
         {
@@ -333,7 +333,7 @@ function Transactions({ isSiderOpen, }) {
             key: "amount",
             render: CpnColumnPrice,
             align: "right",
-            sorter: { compare: (a, b) => a.amount - b.amount, multiple: 1 }
+            sorter: {compare: (a, b) => a.amount - b.amount, multiple: 1}
         },
         {
             dataIndex: "key",
@@ -359,11 +359,11 @@ function Transactions({ isSiderOpen, }) {
             <Layout.Sider className={"Sider"} collapsed={!isSiderOpen} theme="light" width={260}>
                 <ScrollArea>
                     <Menu className={"TransactionIndex"}
-                        defaultSelectedKeys={["0"]}
-                        items={Object.values(objDateIndexes)}
-                        mode="inline"
-                        onSelect={({ key }) => _strCurrentDateIndex(key)}
-                        style={{ border: 0 }}
+                          defaultSelectedKeys={["0"]}
+                          items={Object.values(objDateIndexes)}
+                          mode="inline"
+                          onSelect={({key}) => _strCurrentDateIndex(key)}
+                          style={{border: 0}}
                     />
                 </ScrollArea>
             </Layout.Sider>
@@ -378,7 +378,7 @@ function Transactions({ isSiderOpen, }) {
                                 <Tooltip title={locale[config.locale].tooltip.open_report}>
                                     <Button
                                         danger={isAnalysisView}
-                                        icon={<Icons.UI.BubbleChart />}
+                                        icon={<Icons.UI.BubbleChart/>}
                                         onClick={() => _isAnalysisView(prevState => !prevState)}
                                         size={"large"}
                                         type={"text"}
@@ -387,7 +387,7 @@ function Transactions({ isSiderOpen, }) {
                         }
                         <Tooltip title={locale[config.locale].tooltip.new_record}>
                             <Button
-                                icon={<Icons.UI.ListAdd />}
+                                icon={<Icons.UI.ListAdd/>}
                                 onClick={() => openRecord(new TransactionRecord())}
                                 size={"large"}
                                 type={"text"}
@@ -398,10 +398,10 @@ function Transactions({ isSiderOpen, }) {
                 <Layout.Content className={"Content"}>
                     {
                         strCurrentDateIndex === "0" || strCurrentDateIndex.endsWith("00") ?
-                            <Chart data={objAnalysisData} />
+                            <Chart data={objAnalysisData}/>
                             :
                             isAnalysisView ?
-                                <Chart data={objAnalysisData} isPartial />
+                                <Chart data={objAnalysisData} isPartial/>
                                 :
                                 <ScrollArea>
                                     <Table

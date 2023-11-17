@@ -1,15 +1,15 @@
 import "./Chart.css"
 import ScrollArea from "../Containers/ScrollArea"
-import { AppConfig } from "../../App"
-import { Area, Bar, Liquid, Pie } from "@ant-design/plots"
-import { Divider, Empty, Select, Space, Tag, Typography } from "antd"
-import { useContext, useEffect, useState } from "react"
+import {AppConfig} from "../../App"
+import {Area, Bar, Liquid, Pie} from "@ant-design/plots"
+import {Divider, Empty, Select, Space, Tag, Typography} from "antd"
+import {useContext, useEffect, useState} from "react"
 import locale from "../../Static/Config/Locale/content.json"
 import Components from "../Components/Components";
 
-function Chart({ isPartial, data }) {
+function Chart({isPartial, data}) {
 
-    const { arrTypes, arrCurrencies, config } = useContext(AppConfig)
+    const {arrTypes, arrCurrencies, config} = useContext(AppConfig)
     const [strPieChartKey, _strPieChartKey] = useState("")
     const [numPieChartSum, _numPieChartSum] = useState(0)
 
@@ -73,7 +73,7 @@ function Chart({ isPartial, data }) {
 
     return (
         data.pie.length === 0 ?
-            <Empty />
+            <Empty/>
             :
             <ScrollArea>
                 <div className={"Report"}>
@@ -96,17 +96,17 @@ function Chart({ isPartial, data }) {
                                     </div>
                                 </ScrollArea>
                             </div>
-                            <Divider />
+                            <Divider/>
                             <div className={"Report-Balance-Graph"}>
                                 <Liquid
                                     percent={getPercentageBalance()}
-                                    outline={{ border: 4, distance: 8 }}
-                                    wave={{ length: 128 }}
+                                    outline={{border: 4, distance: 8}}
+                                    wave={{length: 128}}
                                     color={generateStatusColor(getPercentageBalance() * 100)}
                                 />
                             </div>
                         </div>
-                        <Divider type={"vertical"} />
+                        <Divider type={"vertical"}/>
                         <div className={"Report-TTB"}>
                             <Typography.Title level={3}>{locale[config.locale].label.graph_ttb}</Typography.Title>
                             <div className={"Report-TTB-EB"}>
@@ -118,24 +118,24 @@ function Chart({ isPartial, data }) {
                                     onChange={value => _strPieChartKey(arrTypes.find(obj => obj.key === value)?.name ?? "")}
                                 />
                             </div>
-                            <Divider />
+                            <Divider/>
                             <Pie className={"Report-TTB-Chart"}
-                                appendPadding={10}
-                                angleField={"value"}
-                                colorField={"type"}
-                                data={data.pie.find(o => o.type === strPieChartKey)?.breakdown ?? data.pie}
-                                radius={0.8}
-                                statistic={{
-                                    title: false,
-                                    content: { content: numPieChartSum }
-                                }}
-                                innerRadius={0.6}
-                                label={{ type: "spider", labelHeight: 28, content: "{name}\n{percentage}" }}
-                                legend={{ layout: "horizontal", position: "top" }}
+                                 appendPadding={10}
+                                 angleField={"value"}
+                                 colorField={"type"}
+                                 data={data.pie.find(o => o.type === strPieChartKey)?.breakdown ?? data.pie}
+                                 radius={0.8}
+                                 statistic={{
+                                     title: false,
+                                     content: {content: numPieChartSum}
+                                 }}
+                                 innerRadius={0.6}
+                                 label={{type: "spider", labelHeight: 28, content: "{name}\n{percentage}"}}
+                                 legend={{layout: "horizontal", position: "top"}}
                             />
                         </div>
                     </div>
-                    <Divider />
+                    <Divider/>
                     {
                         isPartial ? null :
                             <div className={"Report-Page Page2"}>
@@ -158,8 +158,8 @@ function Chart({ isPartial, data }) {
                             yField={"name"}
                             data={data.bar}
                             seriesField={"name"}
-                            legend={{ position: "top" }}
-                            yAxis={{ label: null }}
+                            legend={{position: "top"}}
+                            yAxis={{label: null}}
                         />
                     </div>
                 </div>

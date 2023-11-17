@@ -1,4 +1,4 @@
-import { blue, cyan, gold, green, magenta, orange, purple, red, volcano } from "@ant-design/colors";
+import {blue, cyan, gold, green, magenta, orange, purple, red, volcano} from "@ant-design/colors";
 
 const colors = {
     magenta: magenta.primary,
@@ -15,4 +15,4 @@ const colors = {
 const colorPrimary = "#2999EE"
 
 export default colors
-export { colorPrimary }
+export {colorPrimary}

@@ -32,29 +32,29 @@
     z-index: 10;
 }
 
-.App>.Header>.LogoTitle {
+.App > .Header > .LogoTitle {
     cursor: pointer;
     opacity: 1;
     transition: opacity .3s ease-in-out;
     margin-left: 5px;
 }
 
-.App>.Header>.LogoTitle:hover {
+.App > .Header > .LogoTitle:hover {
     cursor: pointer;
     opacity: .8;
 }
 
-.App>.Header>.LogoTitle>.ant-space-item {
+.App > .Header > .LogoTitle > .ant-space-item {
     height: 60px;
     display: flex;
     align-items: center;
 }
 
-.App>.Header>.LogoTitle .TitleImage {
-    animation: rotate-center 10s linear infinite;
+.App > .Header > .LogoTitle .TitleImage {
+    animation: rotate-center 20s linear infinite;
 }
 
-.App>.Header>.LogoTitle .TitleText {
+.App > .Header > .LogoTitle .TitleText {
     display: none;
     margin-left: 10px;
     opacity: .9;

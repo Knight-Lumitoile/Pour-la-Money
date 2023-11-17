@@ -4,11 +4,11 @@ import Icons from "./Components/Icons/Icons"
 import locale from "./Static/Config/Locale/content.json"
 import Pages from "./Components/Pages/Pages"
 import req from "./Connector/WebConnector"
-import { App as Antd, Button, ConfigProvider, Layout, Space, Tooltip, Typography } from "antd"
-import { createContext, useEffect, useState } from "react"
-import { colorPrimary } from "./Static/Config/Color/Color";
+import {App as Antd, Button, ConfigProvider, Layout, Space, Tooltip, Typography} from "antd"
+import {createContext, useEffect, useState} from "react"
+import {colorPrimary} from "./Static/Config/Color/Color";
 
-const { ipcRenderer } = window.require("electron")
+const {ipcRenderer} = window.require("electron")
 
 export const AppConfig = createContext(undefined)
 
@@ -64,7 +64,7 @@ function App() {
 
     return (
         isAppReady ?
-            <AppConfig.Provider value={{ arrRecords, _arrRecords, arrTypes, _arrTypes, arrCurrencies, _arrCurrencies, config, _config }}>
+            <AppConfig.Provider value={{arrRecords, _arrRecords, arrTypes, _arrTypes, arrCurrencies, _arrCurrencies, config, _config}}>
                 <ConfigProvider theme={{
                     components: {
                         Layout: {
@@ -84,30 +84,30 @@ function App() {
                         <Layout className={"App"}>
                             <Layout.Header className={"Header"}>
                                 <Space className={`LogoTitle`} onClick={() => _isSiderOpen(pre => !pre)} size={0}>
-                                    <img className={"TitleImage"} src={"./logo512.png"} alt={""} width={60} height={60} />
+                                    <img className={"TitleImage"} src={"./logo512.png"} alt={""} width={60} height={60}/>
                                     <Typography className={"TitleText"}>{"Pour la Money"}</Typography>
                                 </Space>
                                 <Space size={0}>
                                     <Tooltip title={locale[config.locale].tooltip.manage_currency}>
-                                        <Button onClick={() => _isCurrencyFormOpen(prevState => !prevState)} icon={<Icons.UI.Currency />} size={"large"} type={"text"} />
+                                        <Button onClick={() => _isCurrencyFormOpen(prevState => !prevState)} icon={<Icons.UI.Currency/>} size={"large"} type={"text"}/>
                                     </Tooltip>
                                     <Tooltip title={locale[config.locale].tooltip.manage_type}>
-                                        <Button onClick={() => _isTypeFormOpen(prevState => !prevState)} icon={<Icons.UI.PriceTag />} size={"large"} type={"text"} />
+                                        <Button onClick={() => _isTypeFormOpen(prevState => !prevState)} icon={<Icons.UI.PriceTag/>} size={"large"} type={"text"}/>
                                     </Tooltip>
                                     <Tooltip title={locale[config.locale].tooltip.refresh_data}>
-                                        <Button onClick={global.refreshView} icon={<Icons.UI.Refresh />} size={"large"} type={"text"} />
+                                        <Button onClick={global.refreshView} icon={<Icons.UI.Refresh/>} size={"large"} type={"text"}/>
                                     </Tooltip>
                                     <Tooltip title={locale[config.locale].tooltip.settings}>
-                                        <Button onClick={() => _isSettingsFormOpen(prevState => !prevState)} icon={<Icons.UI.Settings />} size={"large"} type={"text"} />
+                                        <Button onClick={() => _isSettingsFormOpen(prevState => !prevState)} icon={<Icons.UI.Settings/>} size={"large"} type={"text"}/>
                                     </Tooltip>
                                 </Space>
                             </Layout.Header>
                             <Layout.Content>
-                                <Pages.Transactions isSiderOpen={isSiderOpen} />
+                                <Pages.Transactions isSiderOpen={isSiderOpen}/>
                             </Layout.Content>
-                            <Forms.ManageCurrency open={isCurrencyFormOpen} onClose={() => _isCurrencyFormOpen(false)} />
-                            <Forms.ManageTransactionType open={isTypeFormOpen} onClose={() => _isTypeFormOpen(false)} />
-                            <Forms.Settings open={isSettingsFormOpen} onClose={() => _isSettingsFormOpen(false)} />
+                            <Forms.ManageCurrency open={isCurrencyFormOpen} onClose={() => _isCurrencyFormOpen(false)}/>
+                            <Forms.ManageTransactionType open={isTypeFormOpen} onClose={() => _isTypeFormOpen(false)}/>
+                            <Forms.Settings open={isSettingsFormOpen} onClose={() => _isSettingsFormOpen(false)}/>
                         </Layout>
                     </Antd>
                 </ConfigProvider>
